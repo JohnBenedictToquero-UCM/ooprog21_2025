@@ -8,7 +8,13 @@ public class UsingJOptionPaneDialogs {
 
             // If user presses Cancel or closes the dialog, exit the program
             if (name == null) {
-                System.exit(0);
+                break;
+            }
+
+            // If input is empty, show message and prompt again
+            if (name.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No name input. Please enter your name.", "Warning", JOptionPane.WARNING_MESSAGE);
+                continue; // Go back to input dialog
             }
 
             // Confirm if user wants their name to be shown (Yes or No only)
@@ -26,7 +32,7 @@ public class UsingJOptionPaneDialogs {
                 // Loop back to input dialog
                 continue;
             } else {
-                // Just in case, exit if dialog is closed
+                // Just in case, exit if dialog is closed without choosing
                 System.exit(0);
             }
         }
