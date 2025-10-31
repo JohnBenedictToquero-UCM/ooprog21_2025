@@ -1,28 +1,38 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class BankBalance2 {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        double balance = 100.00;   
-        double rate = 0.03;        
+        System.out.print("Enter the initial balance: ");
+        double balance = scanner.nextDouble();
+
+        double interestRate = 0.03;
         int year = 1;
-        int choice;
+        int userChoice;
 
         do {
-            System.out.println("Do you want to see the balance at the end of another year?");
-            System.out.print("Enter 1 for yes\n    or any other number for no >> ");
-            choice = input.nextInt();
+            balance += balance * interestRate;
 
-            if (choice == 1) {
-                balance = balance + (balance * rate); 
-                System.out.printf("After year %d at %.2f interest rate, balance is $%.4f%n%n",
-                        year, rate, balance);
+            DecimalFormat formatter = new DecimalFormat("0.00##");
+            String formattedBalance = formatter.format(balance);
+
+            System.out.printf("After year %d at %.2f interest rate, balance is $%s%n", year, interestRate, formattedBalance);
+
+            System.out.println();
+            System.out.println("Do you want to see the balance at the end of another year?");
+            System.out.print("Enter 1 for yes\n");
+            System.out.print("   or any other number for no >> ");
+            userChoice = scanner.nextInt();
+
+            if (userChoice == 1) {
                 year++;
             }
 
-        } while (choice == 1);
-
-        System.out.println("----jGRASP: Operation complete.");
+        } while (userChoice == 1);
+        
+        scanner.close();
     }
 }
+
